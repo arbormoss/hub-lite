@@ -5,3 +5,4 @@ mypy
 pygments
 requests
 types-requests
+pagefind[extended]
