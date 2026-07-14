@@ -46,6 +46,7 @@
 
 <body>
     <div id="__next">
+    <main data-pagefind-body>
         <div class="flex flex-col min-h-screen">
             <div class="flex items-center justify-center w-full p-4 bg-hub-primary-200 text-center">
             </div>
@@ -74,7 +75,7 @@
                                     <div class="">
                                         <p class="font-bold whitespace-nowrap">Version<!-- -->:</p>
                                         <ul class="MetadataList_list__3DlqI list-none text-sm leading-normal">
-                                            <li class="MetadataList_textItem__KKmMN">${version}</li>
+                                            <li class="MetadataList_textItem__KKmMN" data-pagefind-meta="version">${version}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -82,7 +83,7 @@
                                     <div class="">
                                         <p class="font-bold whitespace-nowrap">Last updated<!-- -->:</p>
                                         <ul class="MetadataList_list__3DlqI list-none text-sm leading-normal">
-                                            <li class="MetadataList_textItem__KKmMN">${modified_at}</li>
+                                            <li class="MetadataList_textItem__KKmMN" data-pagefind-meta="last_updated">${modified_at}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -90,7 +91,7 @@
                                     <div class="">
                                         <p class="font-bold whitespace-nowrap">First released<!-- -->:</p>
                                         <ul class="MetadataList_list__3DlqI list-none text-sm leading-normal">
-                                            <li class="MetadataList_textItem__KKmMN">${created_at}</li>
+                                            <li class="MetadataList_textItem__KKmMN" data-pagefind-meta="release_date">${created_at}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -99,7 +100,7 @@
                                         <p class="font-bold whitespace-nowrap">License<!-- -->:</p>
                                         <ul class="MetadataList_list__3DlqI list-none text-sm leading-normal">
                                             <li class="MetadataList_textItem__KKmMN">
-                                                ${license}
+                                                <span data-pagefind-filter="license" data-pagefind-meta="license">${license}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -112,19 +113,19 @@
                                 <div class="text-sm">
                                     <div class="">
                                         <p class="font-bold whitespace-nowrap">Plugin type<!-- -->:</p>
-                                        ${plugin_types}
+                                        <span data-pagefind-filter="plugin_types" data-pagefind-meta="plugin_types">${plugin_types}</span>
                                     </div>
                                 </div>
                                 <div class="text-sm">
-                                    <div class="">
+                                    <div>
                                         <p class="font-bold whitespace-nowrap">Open extension<!-- -->:</p>
-                                        ${open_extension}
+                                        <span data-pagefind-meta="open_extension">${open_extension}</span>
                                     </div>
                                 </div>
                                 <div class="text-sm">
                                     <div class="">
                                         <p class="font-bold whitespace-nowrap">Save extension<!-- -->:</p>
-                                        ${save_extension}
+                                        <span data-pagefind-meta="save_extension">${save_extension}</span>
                                     </div>
                                 </div>
                             </div>
@@ -144,19 +145,19 @@
                                 <div class="text-sm">
                                     <div class="">
                                         <p class="font-bold whitespace-nowrap">Python versions supported<!-- -->:</p>
-                                        ${python_versions}
+                                        <span data-pagefind-filter="python_versions">${python_versions}</span>
                                     </div>
                                 </div>
                                 <div class="text-sm">
                                     <div class="">
                                         <p class="font-bold whitespace-nowrap">Operating system<!-- -->:</p>
-                                        ${os}
+                                        <span data-pagefind-filter="os">${os}</span>
                                     </div>
                                 </div>
                                 <div class="text-sm">
                                     <div class="">
                                         <p class="font-bold whitespace-nowrap">Requirements<!-- -->:</p>
-                                        ${requirements}
+                                        <span data-pagefind-filter="requirements">${requirements}</span>
                                     </div>
                                 </div>
                             </div>
@@ -168,18 +169,18 @@
                         <article
                             class="w-full col-span-2 row-start-1 screen-875:col-span-3 screen-1150:col-start-1 screen-1425:col-start-2">
                                 <div class="container" style="display: flex; flex-direction: column;">
-                                    <h1 class="font-bold text-4xl" style="margin-bottom: 20px;" >${display_name}</h1>
+                                    <h1 class="font-bold text-4xl" style="margin-bottom: 20px;" data-pagefind-meta="display_name">${display_name}</h1>
                                 </div>
 
-                                ${home_link}
+                                <span data-pagefind-meta="home_link">${home_link}</span>
 
                                 <div class="flex justify-between items-center my-6">
-                                    <h2 class="text-lg">${summary}</h2>
+                                    <h2 class="text-lg" data-pagefind-meta="summary">${summary}</h2>
                                 </div>
                                 <ul class="PluginAuthors_authors__hs3zO">
                                     <li class="inline">
                                         <span class="text-[11px] screen-495:text-[14px]
-                                          font-semibold">${authors}</span>
+                                          font-semibold" data-pagefind-meta="authors">${authors}</span>
                                     </li>
                             </ul>
                             <div class="screen-1425:hidden mt-sds-xl mb-sds-xxl"><a
@@ -199,7 +200,7 @@
                                     class="flex flex-col text-xs mt-sds-xl mb-sds-l screen-495:mb-sds-xl gap-sds-m screen-495:gap-sds-l">
                                 </div>
                                 <div class="flex items-center justify-between mb-sds-xxl">
-                                    <div class="Markdown_markdown__QZ95j">
+                                    <div class="Markdown_markdown__QZ95j" data-pagefind-meta="package_metadata_description">
 
                                         ${package_metadata_description}
 
@@ -273,7 +274,7 @@
                                             <div class="inline">
                                                 <p class="font-bold whitespace-nowrap inline mr-sds-s">Plugin
                                                     type<!-- -->:</p>
-                                                    ${plugin_types}
+                                                <span data-pagefind-meta="plugin_types">${plugin_types}</span>
                                             </div>
                                         </div>
                                         <div class="text-sm">
@@ -304,7 +305,7 @@
                                             <div class="inline">
                                                 <p class="font-bold whitespace-nowrap inline mr-sds-s">Python versions
                                                     supported<!-- -->:</p>
-                                                    ${python_versions}
+                                                <span data-pagefind-meta="python_versions">${python_versions}</span>
                                             </div>
                                         </div>
                                         <div class="text-sm">
@@ -323,7 +324,7 @@
                                             <div class="inline">
                                                 <p class="font-bold whitespace-nowrap inline mr-sds-s">
                                                     Requirements<!-- -->:</p>
-                                                    ${requirements}
+                                                <span data-pagefind-meta="requirements">${requirements}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -408,6 +409,7 @@
                     </svg></a>
             </div>
     </div>
+  <main/>
   </div>
 </body>
 
