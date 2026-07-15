@@ -156,8 +156,10 @@ def create_plugins_list_html(plugins: list[PluginPageData], build_dir: str):
     with open(f"{build_dir}/plugins_list.html", "w") as file:
         file.write(html_content)
 
+
 def generate_name_html(plugin: PluginPageData):
     return plugin.name
+
 
 def get_plugin_types(plugin: PluginPageData):
     return [

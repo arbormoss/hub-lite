@@ -2,7 +2,7 @@ beautifulsoup4
 Jinja2
 markdown-it-py[linkify,plugins]
 mypy
+pagefind[extended]
 pygments
 requests
 types-requests
-pagefind[extended]
