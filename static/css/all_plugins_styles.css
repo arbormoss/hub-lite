@@ -1,3 +1,7 @@
+pagefind-results ul {
+    --pf-results-gap: 0px;
+}
+
  .css-ngtr5k {
  padding: 0;
  }
