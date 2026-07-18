@@ -4,6 +4,6 @@ markdown-it-py[linkify,plugins]
 mypy
 pagefind[extended]
 pygments
+pytailwindcss
 requests
 types-requests
-pytailwindcss
