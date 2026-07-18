@@ -79,20 +79,13 @@
                                 class="font-semibold text-[24px] leading-[36px] screen-495:text-[35px] screen-495:leading-[43.8px]">
                                 Plugins</h2>
                         </div>
-                        <div class="flex flex-auto items-center border-b-2 border-black text-xl"
+                        <div class="flex flex-auto items-center border-b-2 border-black text-xl pb-6"
                             data-testid="searchBarForm" id="searchBoxContainer">
                                 <link href="/pagefind/pagefind-component-ui.css" rel="stylesheet">
                                 <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
 
-                                <div class="w-full flex flex-col gap-2">
-                                    <pagefind-config faceted preload></pagefind-config>
-                                    <pagefind-input class="m-10 w-full"></pagefind-input>
-                                    <div class="w-full flex flex-row justify-between gap-2">
-                                        <pagefind-filter-dropdown filter="license" label="License"></pagefind-filter-dropdown>
-                                        <pagefind-filter-dropdown filter="python_versions" label="Python Versions"></pagefind-filter-dropdown>
-                                        <pagefind-filter-dropdown filter="plugin_types" label="Plugin Types"></pagefind-filter-dropdown>
-                                    </div>
-                                </div>
+                                <pagefind-config faceted preload></pagefind-config>
+                                <pagefind-input class="w-full"></pagefind-input>
                         </div>
                     </div>
                 </div>
@@ -109,12 +102,12 @@
                                   </span>
                                 </h2>
                             </div>
-                            <div class="grid justify-center gap-x-sds-xl screen-495:gap-x-12 grid-cols-2"
+                            <div class="grid justify-center"
                                 id="pluginContainer">
                                 <div class="flex items-center" style="gap: 0px; ; align-items: center;"">
                                 <pagefind-results>
                                     <script type="text/pagefind-template">
-                                            <a class="col-span-2 screen-1425:col-span-3 searchResult py-sds-xl border-black border-t-2 last:border-b-2 hover:bg-hub-gray-100" data-testid="pluginSearchResult" href="{{ url | safeUrl }}">
+                                            <a class="searchResult py-sds-xl border-black border-t-2 last:border-b-2 hover:bg-hub-gray-100" data-testid="pluginSearchResult" href="{{ url | safeUrl }}">
                                                 <article class="grid gap-x-sds-xl screen-495:gap-x-12 screen-600:grid-cols-2 screen-1425:grid-cols-napari-3" data-testid="searchResult">
                                                     <div class="col-span-2 screen-495:col-span-1 screen-1425:col-span-2 flex flex-col justify-between">
                                                         <div>
