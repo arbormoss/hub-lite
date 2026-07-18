@@ -2,10 +2,11 @@ BUILDDIR := ./_build
 FETCH_DATA_COMPLETE := $(BUILDDIR)/data/.complete
 CREATE_HTML_COMPLETE := $(BUILDDIR)/plugins/.complete
 INDEX_SEARCH_COMPLETE := $(BUILDDIR)/pagefind/.complete
+CREATE_CSS_COMPLETE := $(BUILDDIR)/static/css/.complete
 
-.PHONY: all clean prep fetch-data create-html index-search serve-local
+.PHONY: all clean prep fetch-data create-html create-css index-search serve-local
 
-all: prep fetch-data create-html index-search
+all: prep fetch-data create-html create-css index-search
 
 define check-venv
 	@echo "Checking if virtual environment is activated..." && \
@@ -64,6 +65,15 @@ $(INDEX_SEARCH_COMPLETE): $(CREATE_HTML_COMPLETE)
 	python3 -m pagefind --site $(BUILDDIR)
 	@touch $(INDEX_SEARCH_COMPLETE)
 
-serve-local: $(INDEX_SEARCH_COMPLETE)
+create-css: $(CREATE_CSS_COMPLETE)
+
+$(CREATE_CSS_COMPLETE): $(INDEX_SEARCH_COMPLETE)
+	$(call check-venv)
+	@echo "Processing Tailwind styles..."
+	tailwindcss -i $(BUILDDIR)/static/css/input.css -o $(BUILDDIR)/static/css/output.css --minify
+	@touch $(CREATE_CSS_COMPLETE)
+	@echo "Tailwind styles created in $(BUILDDIR)/static/css/output.css"
+
+serve-local: $(CREATE_CSS_COMPLETE)
 	@echo "Starting server..."
 	python3 -m http.server --directory $(BUILDDIR)

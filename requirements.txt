@@ -6,3 +6,4 @@ pagefind[extended]
 pygments
 requests
 types-requests
+pytailwindcss
