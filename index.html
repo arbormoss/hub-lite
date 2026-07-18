@@ -102,12 +102,11 @@
                                   </span>
                                 </h2>
                             </div>
-                            <div class="grid justify-center"
+                            <div class="flex flex-col justify-center"
                                 id="pluginContainer">
-                                <div class="flex items-center" style="gap: 0px; ; align-items: center;"">
                                 <pagefind-results>
                                     <script type="text/pagefind-template">
-                                            <a class="searchResult py-sds-xl border-black border-t-2 last:border-b-2 hover:bg-hub-gray-100" data-testid="pluginSearchResult" href="{{ url | safeUrl }}">
+                                            <a class="searchResult py-sds-xl border-black border-t-2 last:border-b-2 hover:bg-hub-gray-100 w-full" data-testid="pluginSearchResult" href="{{ url | safeUrl }}">
                                                 <article class="grid gap-x-sds-xl screen-495:gap-x-12 screen-600:grid-cols-2 screen-1425:grid-cols-napari-3" data-testid="searchResult">
                                                     <div class="col-span-2 screen-495:col-span-1 screen-1425:col-span-2 flex flex-col justify-between">
                                                         <div>
@@ -150,7 +149,7 @@
                                             </a>
                                     </script>
                                     <script type="text/pagefind-template" data-template="placeholder">
-                                            <a class="col-span-2 screen-1425:col-span-3 searchResult py-sds-xl border-black border-t-2 last:border-b-2 hover:bg-hub-gray-100 opacity-30" data-testid="pluginSearchResult" href=".">
+                                            <a class="searchResult py-sds-xl border-black border-t-2 last:border-b-2 hover:bg-hub-gray-100 w-full opacity-30" data-testid="pluginSearchResult" href=".">
                                                 <article class="grid gap-x-sds-xl screen-495:gap-x-12 screen-600:grid-cols-2 screen-1425:grid-cols-napari-3" data-testid="searchResult">
                                                     <div class="col-span-2 screen-495:col-span-1 screen-1425:col-span-2 flex flex-col justify-between">
                                                         <div>
@@ -181,7 +180,6 @@
                                             </a>
                                     </script>
                                 </pagefind-results>
-                                </div>
                             </div>
                         </section>
                     </div>
