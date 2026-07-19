@@ -129,7 +129,9 @@ def create_plugins_list_html(plugins: list[PluginPageData], build_dir: str):
         name = plugin.name
         normalized_name = plugin.normalized_name
         summary = plugin.summary
-        authors = plugin.authors
+        authors = list(
+            dict.fromkeys(plugin.authors + _extract_names(plugin.author_emails))
+        )
         release_date = plugin.created_at or "Unknown"
         last_updated = plugin.modified_at or "Unknown"
         plugin_type = ", ".join(get_plugin_types(plugin)) or "Unknown"
@@ -298,6 +300,24 @@ def generate_os_html(plugin: PluginPageData):
             )
             break
     return os_html
+
+
+def _extract_names(author_emails: list[str]) -> list[str]:
+    """
+    Extract names from `author_emails` lists.
+    Only extracts names from "Name <email>" format (as specified in PEP621), ignoring email only entries.
+
+    Args:
+        author_emails: List of strings formatted according to PEP621.
+
+    Returns:
+        List of all extracted names
+    """
+    return [
+        match.group(1).strip()
+        for author in author_emails
+        if (match := re.match(r"^(.*?)\s*<.*?>$", author))
+    ]
 
 
 def extract_github_info(url):
