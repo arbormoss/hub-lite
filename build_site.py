@@ -134,10 +134,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Build and serve the hub-lite site.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    for command in ("clean", "prep", "fetch-data", "create-html", "all"):
+    for command in ("clean", "prep", "fetch-data", "html", "all"):
         subparsers.add_parser(command, parents=[shared])
 
-    serve_parser = subparsers.add_parser("serve-local", parents=[shared])
+    serve_parser = subparsers.add_parser("live", parents=[shared])
     serve_parser.add_argument("--host", default="127.0.0.1")
     serve_parser.add_argument("--port", type=int, default=8000)
 
@@ -154,11 +154,11 @@ def main() -> None:
         prep(build_dir)
     elif args.command == "fetch-data":
         fetch_data(build_dir)
-    elif args.command == "create-html":
+    elif args.command == "html":
         create_html(build_dir)
     elif args.command == "all":
         build_all(build_dir)
-    elif args.command == "serve-local":
+    elif args.command == "live":
         serve_local(build_dir, args.host, args.port)
 
 

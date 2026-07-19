@@ -29,7 +29,7 @@ jobs:
           name: Build static site
           command: |
             export PATH="$HOME/.pixi/bin:$PATH"
-            pixi run build
+            pixi run all
       - store_artifacts:
           path: _build
           destination: build-artifacts
@@ -63,7 +63,7 @@ jobs:
           name: Build static site
           command: |
             export PATH="$HOME/.pixi/bin:$PATH"
-            pixi run build
+            pixi run all
 
 workflows:
   version: 2

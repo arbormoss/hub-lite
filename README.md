@@ -20,7 +20,7 @@ The site is a static build with a small Python-based generator.
 	- `_build/plugins/*.html` for individual plugin pages
 	- `_build/plugins_list.html` for the homepage plugin list
 4. `index.html` is the homepage shell and `static/js/plugin_loading_and_search.js` loads the generated plugin list and client-side search behavior.
-5. `.github/workflows/build_and_deploy.yml` runs `make all` and publishes `_build/` to GitHub Pages.
+5. `.github/workflows/build_and_deploy.yml` runs `pixi run all` and publishes `_build/` to GitHub Pages.
 
 The key implementation surfaces are:
 
@@ -38,21 +38,21 @@ The key implementation surfaces are:
 To build the website locally:
 ```sh
 # install pixi if you don't have it already
-pixi run build
+pixi run all
 ```
 or to serve the site locally in your browser:
 ```sh
-pixi run serve-local
+pixi run live
 ```
 
 ### Development Workflow
 
-All tasks are available through `build_site.py` and can be run with `uv`, `pixi`, or make. The tasks are:
+All tasks are available through `build_site.py` and can be run with `pixi` or `uv`. The tasks are:
 
 - `clean`: deletes the `_build/` directory and everything inside it, so use with caution. This is the first step in a full build, but you can also run it separately if you want to start from a clean slate.
-- `prep`: copies static assets into `_build/` and prepares the build environment, but does not run the data fetching or HTML generation steps, so it is fast to run and can be used before `fetch-data` or `create-html` for iterative development.
+- `prep`: copies static assets into `_build/` and prepares the build environment, but does not run the data fetching or HTML generation steps, so it is fast to run and can be used before `fetch-data` or `html` for iterative development.
 - `fetch-data`: runs the data fetching step, which can be slow due to the number of plugins and API calls, but is only needed when plugin data changes.
-- `create-html`: runs the data fetching and HTML generation steps, but does not clean or copy static assets, so it is faster for iterative development.
+- `html`: runs the data fetching and HTML generation steps, but does not clean or copy static assets, so it is faster for iterative development.
 
 ### Recommended: pixi
 
@@ -63,17 +63,17 @@ Useful tasks:
 - `pixi run clean`
 - `pixi run prep`
 - `pixi run fetch-data`
-- `pixi run create-html`
-- `pixi run build`
-- `pixi run serve-local`
+- `pixi run html`
+- `pixi run all`
+- `pixi run live`
 
 ### Alternative: uv
 
 If you prefer a Python-native workflow without Pixi, use [`uv`](https://docs.astral.sh/uv/getting-started/installation/) against the same
-`pyproject.toml` manifest. This uses the commands that make wraps, so the underlying Python scripts are the same as with Pixi. E.g.
+`pyproject.toml` manifest. The underlying Python scripts are the same as with Pixi. E.g.
 
 - `uv run python build_site.py all`
-- `uv run python build_site.py serve-local`
+- `uv run python build_site.py live`
 
 ### Acknowledgments
 

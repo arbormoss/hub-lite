@@ -38,10 +38,9 @@ default = { features = ["dev"], solve-group = "default" }
 clean = "python build_site.py clean"
 prep = "python build_site.py prep"
 fetch-data = "python build_site.py fetch-data"
-create-html = "python build_site.py create-html"
+html = "python build_site.py html"
 all = "python build_site.py all"
-build = "python build_site.py all"
-serve-local = "python build_site.py serve-local"
+live = "python build_site.py live"
 
 [tool.ruff.lint]
 select = [
