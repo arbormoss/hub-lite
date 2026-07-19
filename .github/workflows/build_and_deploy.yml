@@ -3,36 +3,61 @@ name: Build and deploy site
 on:
   schedule:
     # Run 4x per day, offset to 20 min after hour to avoid peak GitHub load
-    - cron: '20 2,8,14,20 * * *'  # 2:20 AM, 8:20 AM, 2:20 PM, 8:20 PM UTC
-  # You can also trigger this workflow manually
+    - cron: '20 2,8,14,20 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  run-scripts:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f  # v0.10.0
+        with:
+          locked: true
+
+      - name: Run pre-commit hooks
+        run: pixi run -e dev prek run --all-files
+
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permissions:
-      contents: write
-
     steps:
-    - name: Check out repository
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      with:
-        persist-credentials: false
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          persist-credentials: false
 
-    - name: Set up pixi
-      uses: prefix-dev/setup-pixi@v0.9.4
-      with:
-        pixi-version: v0.68.1
-        cache: true
-        manifest-path: pyproject.toml
-        locked: true
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f  # v0.10.0
+        with:
+          locked: true
 
-    - name: Fetch data and build HTML
-      run: pixi run all
+      - name: Fetch data and build HTML
+        run: pixi run all
 
-    - name: Deploy build to gh pages
-      uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
-      with:
-        branch: gh-pages
-        folder: _build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5.0.0
+        with:
+          path: ./_build
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128  # v5.0.0
