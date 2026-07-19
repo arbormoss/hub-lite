@@ -77,7 +77,7 @@ def prepare_build_directory(build_dir: Path) -> None:
 
 def run_script(script_name: str, build_dir: Path) -> None:
     require_environment()
-    subprocess.run(
+    subprocess.run(  # noqa: S603  # trusted input: running project scripts with current interpreter
         [sys.executable, str(ROOT / script_name), str(build_dir)],
         check=True,
         cwd=ROOT,
@@ -117,10 +117,12 @@ def serve_local(build_dir: Path, host: str, port: int) -> None:
         **kwargs,
     )
 
-    with contextlib.suppress(KeyboardInterrupt):
-        with socketserver.TCPServer((host, port), handler) as httpd:
-            print(f"Serving HTTP on {host} port {port} (http://{host}:{port}/) ...")
-            httpd.serve_forever()
+    with (
+        contextlib.suppress(KeyboardInterrupt),
+        socketserver.TCPServer((host, port), handler) as httpd,
+    ):
+        print(f"Serving HTTP on {host} port {port} (http://{host}:{port}/) ...")
+        httpd.serve_forever()
 
 
 def build_parser() -> argparse.ArgumentParser:
