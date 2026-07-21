@@ -25,6 +25,11 @@ pagefind-input {
     --pf-icon-search: url("/static/images/search-icon.svg");
 }
 
+pagefind-summary {
+    --pf-summary-font-size: var(--text-xl);
+    --pf-text-muted: var(--color-black);
+}
+
  .css-ngtr5k {
  padding: 0;
  }
