@@ -2,6 +2,29 @@ pagefind-results ul {
     --pf-results-gap: 0px;
 }
 
+pagefind-input {
+    --pf-font: var(--font-sans);
+
+    --pf-outline-focus: rgba(0,0,0,0);
+    --pf-outline-width: 0px;
+    --pf-outline-offset: 0px;
+
+    --pf-text: var(--color-black);
+    --pf-text-secondary: var(--color-gray-500);
+    --pf-text-muted: var(--color-gray-500);
+
+    --pf-background: rgba(0,0,0,0);
+    --pf-border: rgba(0,0,0,0);
+    --pf-border-focus: rgba(0,0,0,0);
+    --pf-skeleton: rgba(0,0,0,0);
+    --pf-skeleton-shine: rgba(0,0,0,0);
+    --pf-hover: rgba(0,0,0,0);
+    --pf-mark: rgba(0,0,0,0);
+    --pf-scroll-shadow: rgba(0,0,0,0);
+
+    --pf-icon-search: url("/static/images/search-icon.svg");
+}
+
  .css-ngtr5k {
  padding: 0;
  }
