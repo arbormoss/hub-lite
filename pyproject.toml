@@ -13,7 +13,9 @@ dependencies = [
   "beautifulsoup4",
   "jinja2",
   "markdown-it-py[linkify,plugins]",
+  "pagefind[extended]",
   "pygments",
+  "pytailwindcss",
   "requests",
 ]
 
@@ -40,6 +42,8 @@ clean = "python build_site.py clean"
 prep = "python build_site.py prep"
 fetch-data = "python build_site.py fetch-data"
 html = "python build_site.py html"
+index-search = "python build_site.py index-search"
+css = "python build_site.py css"
 all = "python build_site.py all"
 live = "python build_site.py live"
 
