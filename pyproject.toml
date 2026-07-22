@@ -1,3 +1,48 @@
+[project]
+name = "hub-lite"
+version = "0.1.0"
+description = "Static site generator for the napari hub lite website"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "napari team" },
+]
+requires-python = ">=3.13"
+dependencies = [
+  "beautifulsoup4",
+  "jinja2",
+  "markdown-it-py[linkify,plugins]",
+  "pygments",
+  "requests",
+]
+
+[dependency-groups]
+dev = [
+  "mypy",
+  "prek",
+  "types-requests",
+]
+
+[tool.uv]
+package = false
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+name = "hub-lite"
+platforms = ["win-64", "linux-64", "osx-arm64"]
+
+[tool.pixi.environments]
+default = { features = ["dev"], solve-group = "default" }
+
+[tool.pixi.tasks]
+clean = "python build_site.py clean"
+prep = "python build_site.py prep"
+fetch-data = "python build_site.py fetch-data"
+html = "python build_site.py html"
+all = "python build_site.py all"
+live = "python build_site.py live"
+
 [tool.ruff.lint]
 select = [
     "E",  # pycodestyle
