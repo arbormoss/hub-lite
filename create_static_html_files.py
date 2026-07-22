@@ -52,7 +52,9 @@ MISSING_LEXERS = [
     "angular2",
     "bitex",
     "bibtex",
+    "csv",
     "commandline",
+    "env",
     "math",
     "mermaid",
     "{important}",
@@ -127,7 +129,9 @@ def create_plugins_list_html(plugins: list[PluginPageData], build_dir: str):
         name = plugin.name
         normalized_name = plugin.normalized_name
         summary = plugin.summary
-        authors = plugin.authors
+        authors = list(
+            dict.fromkeys(plugin.authors + _extract_names(plugin.author_emails))
+        )
         release_date = plugin.created_at or "Unknown"
         last_updated = plugin.modified_at or "Unknown"
         plugin_type = ", ".join(get_plugin_types(plugin)) or "Unknown"
@@ -153,7 +157,7 @@ def create_plugins_list_html(plugins: list[PluginPageData], build_dir: str):
 
     html_content += "</body>\n</html>"
 
-    with open(f"{build_dir}/plugins_list.html", "w") as file:
+    with open(f"{build_dir}/plugins_list.html", "w", encoding="utf-8") as file:
         file.write(html_content)
 
 
@@ -302,6 +306,24 @@ def generate_os_html(plugin: PluginPageData):
     return os_html
 
 
+def _extract_names(author_emails: list[str]) -> list[str]:
+    """
+    Extract names from `author_emails` lists.
+    Only extracts names from "Name <email>" format (as specified in PEP621), ignoring email only entries.
+
+    Args:
+        author_emails: List of strings formatted according to PEP621.
+
+    Returns:
+        List of all extracted names
+    """
+    return [
+        match.group(1).strip()
+        for author in author_emails
+        if (match := re.match(r"^(.*?)\s*<.*?>$", author))
+    ]
+
+
 def extract_github_info(url):
     match = re.search(r"github\.com/(?P<user>[^/]+)/(?P<repo>[^/]+)(?:\.git)?", url)
     user = match.group("user") if match else None
@@ -395,7 +417,9 @@ def create_plugin_page_html(plugin: PluginPageData, template, plugin_dir):
 
     # Save the HTML file for each plugin
     os.makedirs(plugin_dir, exist_ok=True)
-    with open(f"{plugin_dir}/{plugin.normalized_name}.html", "w") as file:
+    with open(
+        f"{plugin_dir}/{plugin.normalized_name}.html", "w", encoding="utf-8"
+    ) as file:
         file.write(filled_template)
 
 
@@ -406,13 +430,13 @@ if __name__ == "__main__":
     plugin_dir = f"{build_dir}/plugins"
     template_dir = f"{build_dir}/templates"
 
-    with open(f"{data_dir}/plugin_page_data.json") as file:
+    with open(f"{data_dir}/plugin_page_data.json", encoding="utf-8") as file:
         plugins_data = [PluginPageData(**plugin) for plugin in json.load(file)]
 
     create_plugins_list_html(plugins_data, build_dir)
 
     # Read the individual plugin HTML template
-    with open(f"{template_dir}/each_plugin_template.html") as file:
+    with open(f"{template_dir}/each_plugin_template.html", encoding="utf-8") as file:
         template = file.read()
 
     # Generate individual plugin pages

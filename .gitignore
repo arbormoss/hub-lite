@@ -7,3 +7,4 @@ test.html
 static/plugins/
 _build/
 **/__pycache__/
+*.pyc
