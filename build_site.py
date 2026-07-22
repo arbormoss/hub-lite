@@ -104,7 +104,7 @@ def create_html(build_dir: Path) -> None:
 
 def index_search(build_dir: Path) -> None:
     require_environment()
-    subprocess.run(
+    subprocess.run(  # noqa: S603  # trusted input: running pagefind on the build directory
         [sys.executable, "-m", "pagefind", "--site", str(build_dir)],
         check=True,
         cwd=ROOT,
