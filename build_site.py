@@ -161,7 +161,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Build and serve the hub-lite site.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    for command in ("clean", "prep", "fetch-data", "html", "index-search", "css", "all"):
+    for command in (
+        "clean",
+        "prep",
+        "fetch-data",
+        "html",
+        "index-search",
+        "css",
+        "all",
+    ):
         subparsers.add_parser(command, parents=[shared])
 
     serve_parser = subparsers.add_parser("live", parents=[shared])
