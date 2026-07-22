@@ -30,6 +30,14 @@ pagefind-summary {
     --pf-text-muted: var(--color-black);
 }
 
+/* Pagefind-added classes not in the archived v3 Tailwind CSS */
+.min-h-\[60dvh\] {
+    min-height: 60dvh;
+}
+.opacity-30 {
+    opacity: 0.3;
+}
+
  .css-ngtr5k {
  padding: 0;
  }

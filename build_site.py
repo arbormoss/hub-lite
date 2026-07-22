@@ -111,26 +111,9 @@ def index_search(build_dir: Path) -> None:
     )
 
 
-def create_css(build_dir: Path) -> None:
-    require_environment()
-    subprocess.run(
-        [
-            "tailwindcss",
-            "-i",
-            str(build_dir / "static" / "css" / "input.css"),
-            "-o",
-            str(build_dir / "static" / "css" / "output.css"),
-            "--minify",
-        ],
-        check=True,
-        cwd=ROOT,
-    )
-
-
 def build_all(build_dir: Path) -> None:
     create_html(build_dir)
     index_search(build_dir)
-    create_css(build_dir)
 
 
 def serve_local(build_dir: Path, host: str, port: int) -> None:
@@ -161,7 +144,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Build and serve the hub-lite site.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    for command in ("clean", "prep", "fetch-data", "html", "index-search", "css", "all"):
+    for command in ("clean", "prep", "fetch-data", "html", "index-search", "all"):
         subparsers.add_parser(command, parents=[shared])
 
     serve_parser = subparsers.add_parser("live", parents=[shared])
@@ -185,8 +168,6 @@ def main() -> None:
         create_html(build_dir)
     elif args.command == "index-search":
         index_search(build_dir)
-    elif args.command == "css":
-        create_css(build_dir)
     elif args.command == "all":
         build_all(build_dir)
     elif args.command == "live":
