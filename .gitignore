@@ -6,5 +6,5 @@ napari_hub_alternative.ipynb
 test.html
 static/plugins/
 _build/
-__pycache__/
+**/__pycache__/
 *.pyc

@@ -161,6 +161,10 @@ def create_plugins_list_html(plugins: list[PluginPageData], build_dir: str):
         file.write(html_content)
 
 
+def generate_name_html(plugin: PluginPageData):
+    return plugin.name
+
+
 def get_plugin_types(plugin: PluginPageData):
     return [
         ptype
@@ -387,6 +391,7 @@ def create_plugin_page_html(plugin: PluginPageData, template, plugin_dir):
     else:
         html_description = "No description available"
 
+    name_html = generate_name_html(plugin)
     plugin_types_html = generate_plugin_types_html(plugin)
     openfile_types_html = generate_open_extensions_html(plugin)
     savefile_types_html = generate_save_extensions_html(plugin)
@@ -396,6 +401,7 @@ def create_plugin_page_html(plugin: PluginPageData, template, plugin_dir):
     home_html = generate_home_html(plugin)
 
     template_data = dataclasses.asdict(plugin)
+    template_data["name"] = name_html
     template_data["authors"] = ", ".join(plugin.authors)
     template_data["open_extension"] = openfile_types_html
     template_data["save_extension"] = savefile_types_html

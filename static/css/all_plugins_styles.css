@@ -1,3 +1,41 @@
+pagefind-results ul {
+    --pf-results-gap: 0px;
+}
+
+pagefind-input {
+    --pf-font: var(--font-sans);
+
+    --pf-outline-focus: rgba(0,0,0,0);
+    --pf-outline-width: 0px;
+    --pf-outline-offset: 0px;
+
+    --pf-text: var(--color-black);
+
+    --pf-background: rgba(0,0,0,0);
+    --pf-border: rgba(0,0,0,0);
+    --pf-border-focus: rgba(0,0,0,0);
+    --pf-skeleton: rgba(0,0,0,0);
+    --pf-skeleton-shine: rgba(0,0,0,0);
+    --pf-hover: rgba(0,0,0,0);
+    --pf-mark: rgba(0,0,0,0);
+    --pf-scroll-shadow: rgba(0,0,0,0);
+
+    --pf-icon-search: url("/static/images/search-icon.svg");
+}
+
+pagefind-summary {
+    --pf-summary-font-size: var(--text-xl);
+    --pf-text-muted: var(--color-black);
+}
+
+/* Pagefind-added classes not in the archived v3 Tailwind CSS */
+.min-h-\[60dvh\] {
+    min-height: 60dvh;
+}
+.opacity-30 {
+    opacity: 0.3;
+}
+
  .css-ngtr5k {
  padding: 0;
  }
