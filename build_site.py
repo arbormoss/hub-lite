@@ -13,9 +13,7 @@ ROOT = Path(__file__).resolve().parent
 DEFAULT_BUILD_DIR = ROOT / "_build"
 ASSET_DIRS = (
     (ROOT / "templates", "templates"),
-    (ROOT / "static" / "images", "static/images"),
-    (ROOT / "static" / "css", "static/css"),
-    (ROOT / "static" / "js", "static/js"),
+    (ROOT / "static", "static"),
 )
 ASSET_FILES = (
     (ROOT / "index.html", "index.html"),
@@ -101,10 +99,21 @@ def create_html(build_dir: Path) -> None:
     fetch_data(build_dir)
     (build_dir / "plugins").mkdir(parents=True, exist_ok=True)
     run_script("create_static_html_files.py", build_dir)
+    shutil.rmtree(build_dir / "templates")
+
+
+def index_search(build_dir: Path) -> None:
+    require_environment()
+    subprocess.run(  # noqa: S603  # trusted input: running pagefind on the build directory
+        [sys.executable, "-m", "pagefind", "--site", str(build_dir)],
+        check=True,
+        cwd=ROOT,
+    )
 
 
 def build_all(build_dir: Path) -> None:
     create_html(build_dir)
+    index_search(build_dir)
 
 
 def serve_local(build_dir: Path, host: str, port: int) -> None:
@@ -145,7 +154,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Build and serve the hub-lite site.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    for command in ("clean", "prep", "fetch-data", "html", "all"):
+    for command in ("clean", "prep", "fetch-data", "html", "index-search", "all"):
         subparsers.add_parser(command, parents=[shared])
 
     serve_parser = subparsers.add_parser("live", parents=[shared])
@@ -167,6 +176,8 @@ def main() -> None:
         fetch_data(build_dir)
     elif args.command == "html":
         create_html(build_dir)
+    elif args.command == "index-search":
+        index_search(build_dir)
     elif args.command == "all":
         build_all(build_dir)
     elif args.command == "live":
