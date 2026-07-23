@@ -10,8 +10,6 @@ pagefind-input {
     --pf-outline-offset: 0px;
 
     --pf-text: var(--color-black);
-    --pf-text-secondary: var(--color-gray-500);
-    --pf-text-muted: var(--color-gray-500);
 
     --pf-background: rgba(0,0,0,0);
     --pf-border: rgba(0,0,0,0);
