@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import contextlib
 import http.server
 import os
 import shutil
@@ -121,7 +120,9 @@ def serve_local(build_dir: Path, host: str, port: int) -> None:
         httpd = socketserver.TCPServer((host, port), handler)
     except OSError:
         print(f"Server unable to bind to port {port}.")
-        print("If you recently ran the development server, you may need to wait a bit for the port to be reclaimed or try another port by appending --port <port number> to your command.")
+        print(
+            "If you recently ran the development server, you may need to wait a bit for the port to be reclaimed or try another port by appending --port <port number> to your command."
+        )
         sys.exit(1)
 
     print(f"Serving HTTP on {host} port {port} (http://{host}:{port}/) ...")
@@ -131,6 +132,7 @@ def serve_local(build_dir: Path, host: str, port: int) -> None:
         print("\nExiting...")
         httpd.server_close()
         sys.exit(0)
+
 
 def build_parser() -> argparse.ArgumentParser:
     shared = argparse.ArgumentParser(add_help=False)
