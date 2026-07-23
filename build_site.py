@@ -100,6 +100,7 @@ def create_html(build_dir: Path) -> None:
     fetch_data(build_dir)
     (build_dir / "plugins").mkdir(parents=True, exist_ok=True)
     run_script("create_static_html_files.py", build_dir)
+    shutil.rmtree(build_dir / "templates")
 
 
 def index_search(build_dir: Path) -> None:
